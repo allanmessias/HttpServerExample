@@ -9,6 +9,7 @@ import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.Base64;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
@@ -28,10 +29,16 @@ class ServerTest {
         System.out.println("Server started on port " + serverExample.getHttpServer().getAddress());
     }
 
+    private static final String getBasicAuthentication(String username, String password) {
+    	String valueToEncode = username + ":" + password;
+    	return "Basic " + Base64.getEncoder().encodeToString(valueToEncode.getBytes()); 
+    }
+    
     @Test
-    void itShouldSendRequestAndReturnHttpCode200() throws InterruptedException, ExecutionException {
+    void itShouldSendAGETRequestWithAuthenticatedUser() throws InterruptedException, ExecutionException {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
+        		.setHeader("Authorization", getBasicAuthentication("allan", "1234"))
                 .uri(URI.create(this.url))
                 .build();
         CompletableFuture<HttpResponse<String>> response = 
@@ -42,9 +49,10 @@ class ServerTest {
     }
     
     @Test
-    void itShouldSendAnPOSTRequestAndReturnHttpCode200() throws ExecutionException, InterruptedException {
+    void itShouldSendAPOSTRequestWithAuthenticatedUser() throws ExecutionException, InterruptedException {
     	HttpClient client = HttpClient.newHttpClient();
     	HttpRequest request = HttpRequest.newBuilder()
+    			.setHeader("Authorization", getBasicAuthentication("allan", "1234"))
     			.uri(URI.create(this.url))
     			.POST(HttpRequest.BodyPublishers.noBody())
     			.build();

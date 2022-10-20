@@ -23,7 +23,7 @@ public class ServerExample {
     }
 
     private void handleRequests(HttpHandler handler) {
-        this.httpServer.createContext("/test", handler);
+        this.httpServer.createContext("/test", handler).setAuthenticator(new AuthenticatorExample("test"));
     }
 
     public void startServer() {
