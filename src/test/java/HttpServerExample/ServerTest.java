@@ -9,6 +9,8 @@ import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 
@@ -27,27 +29,31 @@ class ServerTest {
     }
 
     @Test
-    void itShouldSendRequestAndReturnHttpCode200() throws URISyntaxException, InterruptedException, IOException {
+    void itShouldSendRequestAndReturnHttpCode200() throws InterruptedException, ExecutionException {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(new URI("http://localhost:8000/test"))
+                .uri(URI.create(this.url))
                 .build();
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        CompletableFuture<HttpResponse<String>> response = 
+        		client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+        		.whenComplete((s, t) -> s.body()); 
 
-        Assertions.assertEquals(response.statusCode(), 200);
+        Assertions.assertEquals(response.get().statusCode(), 200);
     }
     
     @Test
-    void itShouldSendAnPOSTRequestAndReturnHttpCode200() throws IOException, InterruptedException {
+    void itShouldSendAnPOSTRequestAndReturnHttpCode200() throws ExecutionException, InterruptedException {
     	HttpClient client = HttpClient.newHttpClient();
     	HttpRequest request = HttpRequest.newBuilder()
     			.uri(URI.create(this.url))
     			.POST(HttpRequest.BodyPublishers.noBody())
     			.build();
-    	HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+    	CompletableFuture<HttpResponse<String>> response = 
+    			client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+    			.whenComplete((s, t) -> s.body());
     	
-    	Assertions.assertEquals(response.statusCode(), 200);
-    	Assertions.assertEquals(response.body(), "{\"message\":\"ok\"}");
+    	Assertions.assertEquals(response.get().statusCode(), 200);
+    	Assertions.assertEquals(response.get().body(), "{\"message\":\"ok\"}");
     	
     }
 }
