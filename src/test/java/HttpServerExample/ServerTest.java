@@ -64,4 +64,18 @@ class ServerTest {
     	Assertions.assertEquals(response.get().body(), "{\"message\":\"ok\"}");
     	
     }
+    
+    @Test
+    void itShouldThrow401StatusCodeToUnauthicatedUser() throws InterruptedException, ExecutionException {
+    	HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+        		.setHeader("Authorization", getBasicAuthentication("fulano", "1234"))
+                .uri(URI.create(this.url))
+                .build();
+        CompletableFuture<HttpResponse<String>> response = 
+        		client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+        		.whenComplete((s, t) -> s.body()); 
+        
+        Assertions.assertEquals(response.get().statusCode(), 401); 
+    }
 }
