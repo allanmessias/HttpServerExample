@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="fc8921f7-0db9-475b-a12b-74f2898f4c8b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/HttpServerExample/ServerExample.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/HttpServerExample/ServerExample.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/HttpServerExample/Handlers/HttpHandlerExample.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/HttpServerExample/Handlers/HttpHandlerExample.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/HttpServerExample/ServerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/HttpServerExample/ServerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -27,7 +27,6 @@
   </component>
   <component name="HttpClientSelectedEnvironments">
     <file url="jar://$APPLICATION_HOME_DIR$/plugins/restClient/lib/restClient.jar!/com/intellij/ws/rest/client/requests/collection/requests-with-tests.http" environment="test" />
-    <file url="jar://$APPLICATION_HOME_DIR$/plugins/restClient/lib/restClient.jar!/com/intellij/ws/rest/client/requests/collection/post-requests.http" environment="test" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -76,7 +75,9 @@
       <updated>1665949365203</updated>
       <workItem from="1665949366786" duration="2465000" />
       <workItem from="1665951855300" duration="9387000" />
-      <workItem from="1666043907758" duration="11811000" />
+      <workItem from="1666043907758" duration="12468000" />
+      <workItem from="1666218522557" duration="2395000" />
+      <workItem from="1666221925753" duration="18000" />
     </task>
     <servers />
   </component>
