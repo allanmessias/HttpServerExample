@@ -9,6 +9,9 @@ import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.Base64;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 
@@ -26,28 +29,53 @@ class ServerTest {
         System.out.println("Server started on port " + serverExample.getHttpServer().getAddress());
     }
 
-    @Test
-    void itShouldSendRequestAndReturnHttpCode200() throws URISyntaxException, InterruptedException, IOException {
-        HttpClient client = HttpClient.newHttpClient();
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(new URI("http://localhost:8000/test"))
-                .build();
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-
-        Assertions.assertEquals(response.statusCode(), 200);
+    private static final String getBasicAuthentication(String username, String password) {
+    	String valueToEncode = username + ":" + password;
+    	return "Basic " + Base64.getEncoder().encodeToString(valueToEncode.getBytes()); 
     }
     
     @Test
-    void itShouldSendAnPOSTRequestAndReturnHttpCode200() throws IOException, InterruptedException {
+    void itShouldSendAGETRequestWithAuthenticatedUser() throws InterruptedException, ExecutionException {
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+        		.setHeader("Authorization", getBasicAuthentication("allan", "1234"))
+                .uri(URI.create(this.url))
+                .build();
+        CompletableFuture<HttpResponse<String>> response = 
+        		client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+        		.whenComplete((s, t) -> s.body()); 
+
+        Assertions.assertEquals(response.get().statusCode(), 200);
+    }
+    
+    @Test
+    void itShouldSendAPOSTRequestWithAuthenticatedUser() throws ExecutionException, InterruptedException {
     	HttpClient client = HttpClient.newHttpClient();
     	HttpRequest request = HttpRequest.newBuilder()
+    			.setHeader("Authorization", getBasicAuthentication("allan", "1234"))
     			.uri(URI.create(this.url))
     			.POST(HttpRequest.BodyPublishers.noBody())
     			.build();
-    	HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+    	CompletableFuture<HttpResponse<String>> response = 
+    			client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+    			.whenComplete((s, t) -> s.body());
     	
-    	Assertions.assertEquals(response.statusCode(), 200);
-    	Assertions.assertEquals(response.body(), "{\"message\":\"ok\"}");
+    	Assertions.assertEquals(response.get().statusCode(), 200);
+    	Assertions.assertEquals(response.get().body(), "{\"message\":\"ok\"}");
     	
+    }
+    
+    @Test
+    void itShouldThrow401StatusCodeToUnauthicatedUser() throws InterruptedException, ExecutionException {
+    	HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+        		.setHeader("Authorization", getBasicAuthentication("fulano", "1234"))
+                .uri(URI.create(this.url))
+                .build();
+        CompletableFuture<HttpResponse<String>> response = 
+        		client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+        		.whenComplete((s, t) -> s.body()); 
+        
+        Assertions.assertEquals(response.get().statusCode(), 401); 
     }
 }
