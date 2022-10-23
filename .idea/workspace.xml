@@ -5,8 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fc8921f7-0db9-475b-a12b-74f2898f4c8b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/HttpClientExample/ClientExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/HttpClientExample/HttpRequestsExample.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/HttpServerExample/AuthenticatorExample.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/HttpServerExample/AuthenticatorExample.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/HttpServerExample/Handlers/HttpHandlerExample.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/HttpServerExample/Handlers/HttpHandlerExample.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/HttpServerExample/ServerExample.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/HttpServerExample/ServerExample.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/HttpServerExample/ServerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/HttpServerExample/ServerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -19,6 +26,7 @@
       <list>
         <option value="JUnit5 Test Class" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -88,7 +96,13 @@
       <pinned-members>
         <PinnedItemInfo parentTag="java.util.HashMap$Node" memberName="key" />
         <PinnedItemInfo parentTag="jdk.internal.net.http.HttpClientImpl" memberName="version" />
+        <PinnedItemInfo parentTag="jdk.internal.net.http.ImmutableHttpRequest" memberName="requestPublisher" />
       </pinned-members>
     </pin-to-top-manager>
+    <watches-manager>
+      <configuration name="JUnit">
+        <watch expression="httpRequest" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

@@ -5,8 +5,6 @@ import com.sun.net.httpserver.BasicAuthenticator;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpPrincipal; 
 
-
-
 public class AuthenticatorExample extends BasicAuthenticator {
 
 	public AuthenticatorExample(String realm) {

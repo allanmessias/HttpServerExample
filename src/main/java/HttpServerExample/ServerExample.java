@@ -21,8 +21,9 @@ public class ServerExample {
     }
 
     private ServerExample handleRequests(HttpHandler handler) {
-        this.httpServer.createContext("/test", handler)
-                .setAuthenticator(new AuthenticatorExample("test"));
+        this.httpServer.createContext("/test", handler);
+        this.httpServer.createContext("/test/login", handler)
+                .setAuthenticator(new AuthenticatorExample("login"));
         return this;
     }
 
