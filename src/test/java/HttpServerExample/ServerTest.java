@@ -3,6 +3,7 @@ package HttpServerExample;
 import HttpClientExample.ClientExample;
 
 
+import com.sun.net.httpserver.HttpServer;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 
@@ -25,7 +26,6 @@ import java.util.concurrent.ExecutionException;
 
 class ServerTest {
     private final String url = "http://localhost:8000/test";
-
     @BeforeAll
     public static void createServerWithIpAndStart() {
         ServerExample serverExample = new ServerExample();
@@ -73,7 +73,9 @@ class ServerTest {
         CompletableFuture<HttpResponse<String>> response =
                 httpClient.sendAsync(httpRequest, HttpResponse.BodyHandlers.ofString())
                         .whenComplete((s, t) -> s.headers());
+
         Assertions.assertEquals(response.get().statusCode(), 200);
+        Assertions.assertEquals(response.get().body(), "{\"message\":\"ok\"}");
 
     }
 

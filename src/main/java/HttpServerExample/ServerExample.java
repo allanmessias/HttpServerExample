@@ -11,6 +11,7 @@ import java.util.concurrent.Executors;
 public class ServerExample {
     private HttpServer httpServer;
     private static final int port = 8000;
+
     private ServerExample createServer() {
         try {
             this.httpServer = HttpServer.create(new InetSocketAddress(ServerExample.port), 0);

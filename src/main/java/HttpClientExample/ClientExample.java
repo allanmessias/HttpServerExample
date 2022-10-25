@@ -46,12 +46,12 @@ public class ClientExample implements HttpRequestsExample {
     }
 
     public static @NotNull String getBasicAuthentication(String username, String password) {
-        Map<String, String> data = new HashMap<>();
-        data.put("username", "allan");
-        data.put("password", "1234");
 
-        String formData = ClientExample.buildFormDataFromMap(data);
-        String valueToEncode = username + ":" + password;
+        Map<String, String> data = new HashMap<>();
+        data.put("username", username);
+        data.put("password", password);
+
+        String valueToEncode = data.get("username") + ":" + data.get("password");
         return "Basic " + Base64.getEncoder().encodeToString(valueToEncode.getBytes());
     }
 
