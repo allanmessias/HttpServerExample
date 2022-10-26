@@ -23,7 +23,7 @@ public class ServerExample {
 
     private ServerExample handleRequests(HttpHandler handler) {
         this.httpServer.createContext("/test", handler);
-        this.httpServer.createContext("/test/login", handler)
+        this.httpServer.createContext("/test/user", handler)
                 .setAuthenticator(new AuthenticatorExample("login"));
         return this;
     }
@@ -36,7 +36,7 @@ public class ServerExample {
 
     public void startServer() {
         this.createServer()
-                .setThreadsExecutors(10)
+                .setThreadsExecutors(30)
                 .handleRequests(new HttpHandlerExample())
                 .httpServer.start();
    }

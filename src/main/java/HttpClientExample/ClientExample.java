@@ -35,6 +35,7 @@ public class ClientExample implements HttpRequestsExample {
         return null;
     }
 
+
     @Override
     public HttpResponse<String> put() throws ExecutionException, InterruptedException {
         return null;
@@ -46,12 +47,7 @@ public class ClientExample implements HttpRequestsExample {
     }
 
     public static @NotNull String getBasicAuthentication(String username, String password) {
-
-        Map<String, String> data = new HashMap<>();
-        data.put("username", username);
-        data.put("password", password);
-
-        String valueToEncode = data.get("username") + ":" + data.get("password");
+        String valueToEncode = username + ":" + password;
         return "Basic " + Base64.getEncoder().encodeToString(valueToEncode.getBytes());
     }
 

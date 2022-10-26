@@ -5,11 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fc8921f7-0db9-475b-a12b-74f2898f4c8b" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/ServerTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/ClientTest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/HttpClientExample/ClientExample.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/HttpClientExample/ClientExample.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/HttpServerExample/AuthenticatorExample.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/HttpServerExample/AuthenticatorExample.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/HttpServerExample/Handlers/HttpHandlerExample.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/HttpServerExample/Handlers/HttpHandlerExample.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/HttpServerExample/ServerExample.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/HttpServerExample/ServerExample.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/HttpServerExample/ServerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/HttpServerExample/ServerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/HttpServerExample/ServerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/HttpServerExample/ClientTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,8 +22,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JUnit5 Test Class" />
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -64,10 +66,31 @@
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
     </key>
+    <key name="ExtractSuperBase.RECENT_KEYS">
+      <recent name="HttpServerExample" />
+    </key>
     <key name="CreateTestDialog.RecentsKey">
       <recent name="HttpServerExample" />
       <recent name="HttpServer" />
     </key>
+  </component>
+  <component name="RunManager" selected="JUnit.ClientTest">
+    <configuration name="ClientTest.itShouldThrow401StatusCodeToUnauthicatedUser" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
+      <module name="HttpServerExample" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="HttpServerExample.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="HttpServerExample" />
+      <option name="MAIN_CLASS_NAME" value="HttpServerExample.ClientTest" />
+      <option name="METHOD_NAME" value="itShouldThrow401StatusCodeToUnauthicatedUser" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -81,6 +104,7 @@
       <workItem from="1665951855300" duration="9387000" />
       <workItem from="1666043907758" duration="11811000" />
       <workItem from="1666738012835" duration="2127000" />
+      <workItem from="1666748736701" duration="355000" />
     </task>
     <servers />
   </component>
@@ -88,6 +112,15 @@
     <option name="version" value="3" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/HttpServerExample/ClientTest.java</url>
+          <line>100</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="java.util.HashMap$Node" memberName="key" />
@@ -95,10 +128,10 @@
         <PinnedItemInfo parentTag="jdk.internal.net.http.ImmutableHttpRequest" memberName="requestPublisher" />
       </pinned-members>
     </pin-to-top-manager>
-    <watches-manager>
-      <configuration name="JUnit">
-        <watch expression="httpRequest" />
-      </configuration>
-    </watches-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/HttpServerExample$ClientTest.ic" NAME="ClientTest Coverage Results" MODIFIED="1666747192391" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>HttpServerExample.*</FILTER>
+    </SUITE>
   </component>
 </project>

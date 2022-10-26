@@ -1,17 +1,12 @@
 package HttpServerExample;
 
 import HttpClientExample.ClientExample;
-
-
-import com.sun.net.httpserver.HttpServer;
+import HttpServerExample.Handlers.HttpHandlerExample;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
-
 import org.junit.jupiter.api.Test;
 
-
 import java.io.IOException;
-
 import java.net.URI;
 import java.net.URLEncoder;
 import java.net.http.HttpClient;
@@ -23,8 +18,7 @@ import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
-
-class ServerTest {
+class ClientTest {
     private final String url = "http://localhost:8000/test";
     @BeforeAll
     public static void createServerWithIpAndStart() {
@@ -38,6 +32,7 @@ class ServerTest {
         ClientExample clientExample = new ClientExample();
 
         Assertions.assertEquals(clientExample.get().statusCode(), 200);
+        Assertions.assertEquals(clientExample.get().body(), "{\"message\":\"ok\"}");
     }
 
     private HttpRequest.BodyPublisher buildFormDataFromMap(Map<String, String> data) {
@@ -54,14 +49,13 @@ class ServerTest {
     }
 
     @Test
-    void itShouldSendAPOSTRequestWithAuthenticationData() throws ExecutionException, InterruptedException, IOException {
+    void itShouldSendAPOSTRequestWithAuthenticationData() throws ExecutionException, InterruptedException {
         HttpClient httpClient = HttpClient.newHttpClient();
 
         // Form data
         Map<String, String> data = new HashMap<>();
         data.put("username", "allan");
         data.put("password", "1234");
-
 
         HttpRequest httpRequest = HttpRequest.newBuilder()
                 .POST(buildFormDataFromMap(data))
@@ -84,7 +78,7 @@ class ServerTest {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
                 .setHeader("Authorization", ClientExample.getBasicAuthentication("allan", "1234"))
-                .uri(URI.create(this.url))
+                .uri(URI.create(this.url + "/user"))
                 .POST(HttpRequest.BodyPublishers.noBody())
                 .build();
         CompletableFuture<HttpResponse<String>> response =
@@ -97,16 +91,15 @@ class ServerTest {
     }
 
     @Test
-    void itShouldThrow401StatusCodeToUnauthicatedUser() throws InterruptedException, ExecutionException {
+    void itShouldThrow401StatusCodeToUnauthicatedUser() throws InterruptedException, ExecutionException, IOException {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
-                .setHeader("Authorization", ClientExample.getBasicAuthentication("fulano", "1234"))
-                .uri(URI.create(this.url))
+                .setHeader("Authorization", ClientExample.getBasicAuthentication("flag", "1234"))
+                .uri(URI.create("http://localhost:8000/test/user"))
                 .build();
-        CompletableFuture<HttpResponse<String>> response =
-                client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
-                        .whenComplete((s, t) -> s.body());
+        HttpResponse<String> response =
+                client.send(request, HttpResponse.BodyHandlers.ofString());
 
-        Assertions.assertEquals(response.get().statusCode(), 401);
+        Assertions.assertEquals(response.statusCode(), 401);
     }
 }

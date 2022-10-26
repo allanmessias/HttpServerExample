@@ -14,11 +14,7 @@ public class AuthenticatorExample extends BasicAuthenticator {
 	@Override 
 	public Authenticator.Result authenticate(HttpExchange exchange) {
 		Authenticator.Result result = super.authenticate(exchange);
-		if(result instanceof Authenticator.Success) {
-			HttpPrincipal principal = ((Authenticator.Success)result).getPrincipal();
-	        String requestMethod = exchange.getRequestMethod();
-		}
-		return result; 
+		return result instanceof Authenticator.Success ? result : new Failure(401);
 	}
 	
 	@Override
