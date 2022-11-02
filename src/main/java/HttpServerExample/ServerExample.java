@@ -6,28 +6,41 @@ import com.sun.net.httpserver.HttpServer;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.util.concurrent.Executors;
 
 public class ServerExample {
     private HttpServer httpServer;
     private static final int port = 8000;
-    public void createServer() {
+    private ServerExample createServer() {
         try {
             this.httpServer = HttpServer.create(new InetSocketAddress(ServerExample.port), 0);
         } catch (IOException e) {
             e.getMessage();
         }
+        return this;
     }
 
-    public HttpServer getHttpServer() {
-        return this.httpServer;
+    private ServerExample handleRequests(HttpHandler handler) {
+        this.httpServer.createContext("/test", handler)
+                .setAuthenticator(new AuthenticatorExample("test"));
+        return this;
     }
 
-    private void handleRequests(HttpHandler handler) {
-        this.httpServer.createContext("/test", handler).setAuthenticator(new AuthenticatorExample("test"));
+    private ServerExample setThreadsExecutors (int threadsExecutors) {
+        if (threadsExecutors < 1) throw new IllegalArgumentException("Need to inform an number higher than 0");
+        this.httpServer.setExecutor(Executors.newFixedThreadPool(threadsExecutors));
+        return this;
     }
 
     public void startServer() {
-        this.handleRequests(new HttpHandlerExample());
-        this.httpServer.start();
+        this.createServer()
+                .setThreadsExecutors(10)
+                .handleRequests(new HttpHandlerExample())
+                .httpServer.start();
+   }
+
+    @Override
+    public String toString() {
+        return String.valueOf(ServerExample.port);
     }
 }

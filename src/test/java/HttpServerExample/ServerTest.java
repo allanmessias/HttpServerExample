@@ -21,12 +21,9 @@ class ServerTest {
 	
     @BeforeAll
     public static void createServerWithIpAndStart() throws IOException {
-        ThreadPoolExecutor threadPoolExecutor = (ThreadPoolExecutor) Executors.newFixedThreadPool(10);
         ServerExample serverExample = new ServerExample();
-        serverExample.createServer();
-        serverExample.getHttpServer().setExecutor(threadPoolExecutor);
         serverExample.startServer();
-        System.out.println("Server started on port " + serverExample.getHttpServer().getAddress());
+        System.out.println("Server started on port " + serverExample.toString());
     }
 
     private static final String getBasicAuthentication(String username, String password) {
