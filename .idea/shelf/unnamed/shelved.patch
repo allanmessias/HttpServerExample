@@ -1,0 +1,1187 @@
+Index: .idea/httpRequests/2022-10-19T211107.200.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/httpRequests/2022-10-19T211107.200.json b/.idea/httpRequests/2022-10-19T211107.200.json
+new file mode 100644
+--- /dev/null	(date 1666224667372)
++++ b/.idea/httpRequests/2022-10-19T211107.200.json	(date 1666224667372)
+@@ -0,0 +1,20 @@
++{
++  "args": {},
++  "data": "{\n  \"id\": 999,\n  \"value\": \"content\"\n}",
++  "files": {},
++  "form": {},
++  "headers": {
++    "Accept-Encoding": "gzip,deflate",
++    "Content-Length": "37",
++    "Content-Type": "application/json",
++    "Host": "httpbin.org",
++    "User-Agent": "Apache-HttpClient/4.5.13 (Java/17.0.4.1)",
++    "X-Amzn-Trace-Id": "Root=1-6350921b-5b8e0bb229d66f1449f06dbb"
++  },
++  "json": {
++    "id": 999,
++    "value": "content"
++  },
++  "origin": "200.97.50.220",
++  "url": "https://httpbin.org/post"
++}
+Index: .idea/httpRequests/http-client.cookies
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/httpRequests/http-client.cookies b/.idea/httpRequests/http-client.cookies
+new file mode 100644
+--- /dev/null	(date 1666224766375)
++++ b/.idea/httpRequests/http-client.cookies	(date 1666224766375)
+@@ -0,0 +1,1 @@
++# domain	path	name	value	date
+Index: .idea/httpRequests/2022-10-19T211108.200.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/httpRequests/2022-10-19T211108.200.json b/.idea/httpRequests/2022-10-19T211108.200.json
+new file mode 100644
+--- /dev/null	(date 1666224668340)
++++ b/.idea/httpRequests/2022-10-19T211108.200.json	(date 1666224668340)
+@@ -0,0 +1,21 @@
++{
++  "args": {},
++  "data": "",
++  "files": {
++    "data": "{\n  \"name\": \"my-name\",\n  \"params\": [1, 2, 3]\n}"
++  },
++  "form": {
++    "element-name": "Name"
++  },
++  "headers": {
++    "Accept-Encoding": "gzip,deflate",
++    "Content-Length": "360",
++    "Content-Type": "multipart/form-data; boundary=WebAppBoundary",
++    "Host": "httpbin.org",
++    "User-Agent": "Apache-HttpClient/4.5.13 (Java/17.0.4.1)",
++    "X-Amzn-Trace-Id": "Root=1-6350921c-246a9176218abf9c49175687"
++  },
++  "json": null,
++  "origin": "200.97.50.220",
++  "url": "https://httpbin.org/post"
++}
+Index: .idea/httpRequests/2022-10-19T211107-1.200.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/httpRequests/2022-10-19T211107-1.200.json b/.idea/httpRequests/2022-10-19T211107-1.200.json
+new file mode 100644
+--- /dev/null	(date 1666224667828)
++++ b/.idea/httpRequests/2022-10-19T211107-1.200.json	(date 1666224667828)
+@@ -0,0 +1,20 @@
++{
++  "args": {},
++  "data": "",
++  "files": {},
++  "form": {
++    "id": "999",
++    "value": "content"
++  },
++  "headers": {
++    "Accept-Encoding": "gzip,deflate",
++    "Content-Length": "20",
++    "Content-Type": "application/x-www-form-urlencoded",
++    "Host": "httpbin.org",
++    "User-Agent": "Apache-HttpClient/4.5.13 (Java/17.0.4.1)",
++    "X-Amzn-Trace-Id": "Root=1-6350921b-54f022f71dc5ae496b4ac1d5"
++  },
++  "json": null,
++  "origin": "200.97.50.220",
++  "url": "https://httpbin.org/post"
++}
+Index: src/main/java/HttpServerExample/AuthenticatorExample.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/HttpServerExample/AuthenticatorExample.java b/src/main/java/HttpServerExample/AuthenticatorExample.java
+new file mode 100644
+--- /dev/null	(date 1666230056129)
++++ b/src/main/java/HttpServerExample/AuthenticatorExample.java	(date 1666230056129)
+@@ -0,0 +1,32 @@
++package HttpServerExample;
++
++import com.sun.net.httpserver.BasicAuthenticator;
++import com.sun.net.httpserver.Authenticator;
++import com.sun.net.httpserver.HttpExchange;
++import com.sun.net.httpserver.HttpPrincipal;
++
++
++public class AuthenticatorExample extends BasicAuthenticator {
++    private Authenticator authenticator;
++    public AuthenticatorExample(String realm) {
++        super(realm);
++    }
++
++    @Override
++    public Authenticator.Result authenticate(HttpExchange httpExchange) {
++        Authenticator.Result result = super.authenticate(httpExchange);
++        if (result instanceof Authenticator.Success) {
++            HttpPrincipal principal = (((Success) result).getPrincipal());
++            String requestMethod = httpExchange.getRequestMethod();
++            if ("GET".equalsIgnoreCase(requestMethod)) {
++                System.out.println("Autentica ai fdp");
++            }
++        }
++        return result;
++    }
++
++    @Override
++    public boolean checkCredentials(String user, String password) {
++        return user.equals("admin") && password.equals("password");
++    }
++}
+Index: .idea/httpRequests/2022-10-19T211108-1.200.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/httpRequests/2022-10-19T211108-1.200.json b/.idea/httpRequests/2022-10-19T211108-1.200.json
+new file mode 100644
+--- /dev/null	(date 1666224668888)
++++ b/.idea/httpRequests/2022-10-19T211108-1.200.json	(date 1666224668888)
+@@ -0,0 +1,17 @@
++{
++  "args": {},
++  "data": "{\n  \"id\": 925592de-c58a-4782-9311-011119f008df,\n  \"price\": 854,\n  \"ts\": 1666224668,\n  \"value\": \"content\"\n}",
++  "files": {},
++  "form": {},
++  "headers": {
++    "Accept-Encoding": "gzip,deflate",
++    "Content-Length": "106",
++    "Content-Type": "application/json",
++    "Host": "httpbin.org",
++    "User-Agent": "Apache-HttpClient/4.5.13 (Java/17.0.4.1)",
++    "X-Amzn-Trace-Id": "Root=1-6350921c-671e1def710f34e6717aebc0"
++  },
++  "json": null,
++  "origin": "200.97.50.220",
++  "url": "https://httpbin.org/post"
++}
+Index: .idea/httpRequests/2022-10-19T221230-1.200.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/httpRequests/2022-10-19T221230-1.200.json b/.idea/httpRequests/2022-10-19T221230-1.200.json
+new file mode 100644
+--- /dev/null	(date 1666228350896)
++++ b/.idea/httpRequests/2022-10-19T221230-1.200.json	(date 1666228350896)
+@@ -0,0 +1,20 @@
++{
++  "args": {},
++  "data": "",
++  "files": {},
++  "form": {
++    "id": "999",
++    "value": "content"
++  },
++  "headers": {
++    "Accept-Encoding": "gzip,deflate",
++    "Content-Length": "20",
++    "Content-Type": "application/x-www-form-urlencoded",
++    "Host": "httpbin.org",
++    "User-Agent": "Apache-HttpClient/4.5.13 (Java/17.0.4.1)",
++    "X-Amzn-Trace-Id": "Root=1-6350a07e-19071e6642fa83fe16edb4e6"
++  },
++  "json": null,
++  "origin": "200.97.50.220",
++  "url": "https://httpbin.org/post"
++}
+Index: bin/pom.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/bin/pom.xml b/bin/pom.xml
+new file mode 100644
+--- /dev/null	(date 1665950124685)
++++ b/bin/pom.xml	(date 1665950124685)
+@@ -0,0 +1,39 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project xmlns="http://maven.apache.org/POM/4.0.0"
++         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
++         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
++    <modelVersion>4.0.0</modelVersion>
++
++    <groupId>org.example</groupId>
++    <artifactId>HttpServerExample</artifactId>
++    <version>1.0-SNAPSHOT</version>
++
++
++
++    <properties>
++        <maven.compiler.source>17</maven.compiler.source>
++        <maven.compiler.target>17</maven.compiler.target>
++        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
++
++    </properties>
++    <dependencies>
++        <dependency>
++            <groupId>org.mockito</groupId>
++            <artifactId>mockito-all</artifactId>
++            <version>1.10.19</version>
++        </dependency>
++        <dependency>
++            <groupId>org.mockito</groupId>
++            <artifactId>mockito-core</artifactId>
++            <version>4.8.0</version>
++        </dependency>
++        <dependency>
++            <groupId>org.junit.jupiter</groupId>
++            <artifactId>junit-jupiter</artifactId>
++            <version>5.8.1</version>
++            <scope>test</scope>
++        </dependency>
++    </dependencies>
++
++</project>
++
+Index: .idea/httpRequests/2022-10-19T221230.200.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/httpRequests/2022-10-19T221230.200.json b/.idea/httpRequests/2022-10-19T221230.200.json
+new file mode 100644
+--- /dev/null	(date 1666228350416)
++++ b/.idea/httpRequests/2022-10-19T221230.200.json	(date 1666228350416)
+@@ -0,0 +1,20 @@
++{
++  "args": {},
++  "data": "{\n  \"id\": 999,\n  \"value\": \"content\"\n}",
++  "files": {},
++  "form": {},
++  "headers": {
++    "Accept-Encoding": "gzip,deflate",
++    "Content-Length": "37",
++    "Content-Type": "application/json",
++    "Host": "httpbin.org",
++    "User-Agent": "Apache-HttpClient/4.5.13 (Java/17.0.4.1)",
++    "X-Amzn-Trace-Id": "Root=1-6350a07e-4d977a562aba60dc524a89c4"
++  },
++  "json": {
++    "id": 999,
++    "value": "content"
++  },
++  "origin": "200.97.50.220",
++  "url": "https://httpbin.org/post"
++}
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"ExternalStorageConfigurationManager\" enabled=\"true\" />\n  <component name=\"MavenProjectsManager\">\n    <option name=\"originalFiles\">\n      <list>\n        <option value=\"$PROJECT_DIR$/pom.xml\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_17\" default=\"true\" project-jdk-name=\"17\" project-jdk-type=\"JavaSDK\">\n    <output url=\"file://$PROJECT_DIR$/out\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision 051ea0c4aad026ad4a5a4c808271e90d4c006f6e)
++++ b/.idea/misc.xml	(date 1666227576370)
+@@ -1,6 +1,11 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ExternalStorageConfigurationManager" enabled="true" />
++  <component name="JavadocGenerationManager">
++    <option name="OUTPUT_DIRECTORY" value="$USER_HOME$" />
++    <option name="OPTION_SCOPE" value="public" />
++    <option name="OPTION_INCLUDE_LIBS" value="true" />
++  </component>
+   <component name="MavenProjectsManager">
+     <option name="originalFiles">
+       <list>
+Index: .idea/httpRequests/2022-10-19T221232.200.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/httpRequests/2022-10-19T221232.200.json b/.idea/httpRequests/2022-10-19T221232.200.json
+new file mode 100644
+--- /dev/null	(date 1666228352116)
++++ b/.idea/httpRequests/2022-10-19T221232.200.json	(date 1666228352116)
+@@ -0,0 +1,17 @@
++{
++  "args": {},
++  "data": "{\n  \"id\": 1206fc13-ae7a-4540-9a04-33aa5eb7b23d,\n  \"price\": 791,\n  \"ts\": 1666228351,\n  \"value\": \"content\"\n}",
++  "files": {},
++  "form": {},
++  "headers": {
++    "Accept-Encoding": "gzip,deflate",
++    "Content-Length": "106",
++    "Content-Type": "application/json",
++    "Host": "httpbin.org",
++    "User-Agent": "Apache-HttpClient/4.5.13 (Java/17.0.4.1)",
++    "X-Amzn-Trace-Id": "Root=1-6350a080-03292c9e52ee804a22661354"
++  },
++  "json": null,
++  "origin": "200.97.50.220",
++  "url": "https://httpbin.org/post"
++}
+Index: bin/.gitignore
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/bin/.gitignore b/bin/.gitignore
+new file mode 100644
+--- /dev/null	(date 1665949362265)
++++ b/bin/.gitignore	(date 1665949362265)
+@@ -0,0 +1,38 @@
++target/
++!.mvn/wrapper/maven-wrapper.jar
++!**/src/main/**/target/
++!**/src/test/**/target/
++
++### IntelliJ IDEA ###
++.idea/modules.xml
++.idea/jarRepositories.xml
++.idea/compiler.xml
++.idea/libraries/
++*.iws
++*.iml
++*.ipr
++
++### Eclipse ###
++.apt_generated
++.classpath
++.factorypath
++.project
++.settings
++.springBeans
++.sts4-cache
++
++### NetBeans ###
++/nbproject/private/
++/nbbuild/
++/dist/
++/nbdist/
++/.nb-gradle/
++build/
++!**/src/main/**/build/
++!**/src/test/**/build/
++
++### VS Code ###
++.vscode/
++
++### Mac OS ###
++.DS_Store
+\ No newline at end of file
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"AutoImportSettings\">\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\n  </component>\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"fc8921f7-0db9-475b-a12b-74f2898f4c8b\" name=\"Changes\" comment=\"\">\n      <change afterPath=\"$PROJECT_DIR$/.idea/uiDesigner.xml\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/src/main/java/HttpServerExample/Handlers/HttpHandlerExample.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/HttpServerExample/Server.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/HttpServerExample/ServerExample.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/test/java/HttpServerExample/ServerTest.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/test/java/HttpServerExample/ServerTest.java\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"JUnit5 Test Class\" />\n        <option value=\"Class\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"HttpClientSelectedEnvironments\">\n    <file url=\"jar://$APPLICATION_HOME_DIR$/plugins/restClient/lib/restClient.jar!/com/intellij/ws/rest/client/requests/collection/requests-with-tests.http\" environment=\"test\" />\n  </component>\n  <component name=\"MarkdownSettingsMigration\">\n    <option name=\"stateVersion\" value=\"1\" />\n  </component>\n  <component name=\"ProjectId\" id=\"2GEMbeIHuXWGcZXS5rWsSqTgrXR\" />\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\">{\n  &quot;keyToString&quot;: {\n    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\n    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,\n    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,\n    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,\n    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,\n    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,\n    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,\n    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,\n    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,\n    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,\n    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,\n    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,\n    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;\n  }\n}</component>\n  <component name=\"RecentsManager\">\n    <key name=\"CreateTestDialog.Recents.Supers\">\n      <recent name=\"\" />\n    </key>\n    <key name=\"CreateTestDialog.RecentsKey\">\n      <recent name=\"HttpServerExample\" />\n      <recent name=\"HttpServer\" />\n    </key>\n  </component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"fc8921f7-0db9-475b-a12b-74f2898f4c8b\" name=\"Changes\" comment=\"\" />\n      <created>1665949365203</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1665949365203</updated>\n      <workItem from=\"1665949366786\" duration=\"2465000\" />\n      <workItem from=\"1665951855300\" duration=\"9387000\" />\n      <workItem from=\"1666043907758\" duration=\"11811000\" />\n    </task>\n    <servers />\n  </component>\n  <component name=\"TypeScriptGeneratedFilesManager\">\n    <option name=\"version\" value=\"3\" />\n  </component>\n  <component name=\"XDebuggerManager\">\n    <pin-to-top-manager>\n      <pinned-members>\n        <PinnedItemInfo parentTag=\"java.util.HashMap$Node\" memberName=\"key\" />\n        <PinnedItemInfo parentTag=\"jdk.internal.net.http.HttpClientImpl\" memberName=\"version\" />\n      </pinned-members>\n    </pin-to-top-manager>\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 051ea0c4aad026ad4a5a4c808271e90d4c006f6e)
++++ b/.idea/workspace.xml	(date 1666233156493)
+@@ -1,14 +1,22 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
++  <component name="AnalysisUIOptions">
++    <option name="SCOPE_TYPE" value="8" />
++    <option name="CUSTOM_SCOPE_NAME" value="Project and Libraries" />
++  </component>
+   <component name="AutoImportSettings">
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+     <list default="true" id="fc8921f7-0db9-475b-a12b-74f2898f4c8b" name="Changes" comment="">
+-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/main/java/HttpServerExample/Handlers/HttpHandlerExample.java" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations/ServerTest.xml" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/src/main/java/HttpServerExample/AuthenticatorExample.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/HttpServerExample/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/HttpServerExample/ServerExample.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/HttpServerExample/Handlers/HttpHandlerExample.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/HttpServerExample/Handlers/HttpHandlerExample.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/HttpServerExample/ServerExample.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/HttpServerExample/ServerExample.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/test/java/HttpServerExample/ServerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/HttpServerExample/ServerTest.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+@@ -29,6 +37,7 @@
+   </component>
+   <component name="HttpClientSelectedEnvironments">
+     <file url="jar://$APPLICATION_HOME_DIR$/plugins/restClient/lib/restClient.jar!/com/intellij/ws/rest/client/requests/collection/requests-with-tests.http" environment="test" />
++    <file url="jar://$APPLICATION_HOME_DIR$/plugins/restClient/lib/restClient.jar!/com/intellij/ws/rest/client/requests/collection/post-requests.http" environment="test" />
+   </component>
+   <component name="MarkdownSettingsMigration">
+     <option name="stateVersion" value="1" />
+@@ -39,34 +48,48 @@
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent">{
+-  &quot;keyToString&quot;: {
+-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
++  <component name="PropertiesComponent"><![CDATA[{
++  "keyToString": {
++    "ASKED_ADD_EXTERNAL_FILES": "true",
++    "RunOnceActivity.OpenProjectViewOnStart": "true",
++    "RunOnceActivity.ShowReadmeOnStart": "true",
++    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
++    "WebServerToolWindowFactoryState": "false",
++    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
++    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
++    "node.js.detected.package.eslint": "true",
++    "node.js.detected.package.tslint": "true",
++    "node.js.selected.package.eslint": "(autodetect)",
++    "node.js.selected.package.tslint": "(autodetect)",
++    "nodejs_package_manager_path": "npm",
++    "project.structure.last.edited": "Modules",
++    "project.structure.proportion": "0.15",
++    "project.structure.side.proportion": "0.2",
++    "rest.client.default.execution.environment": "test"
+   }
+-}</component>
++}]]></component>
+   <component name="RecentsManager">
+     <key name="CreateTestDialog.Recents.Supers">
+       <recent name="" />
++    </key>
++    <key name="ExtractSuperBase.RECENT_KEYS">
++      <recent name="HttpServerExample" />
+     </key>
+     <key name="CreateTestDialog.RecentsKey">
+       <recent name="HttpServerExample" />
+       <recent name="HttpServer" />
+     </key>
+   </component>
++  <component name="RunManager">
++    <configuration name="All in post-requests" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" path="jar://$APPLICATION_HOME_DIR$/plugins/restClient/lib/restClient.jar!/com/intellij/ws/rest/client/requests/collection/post-requests.http">
++      <method v="2" />
++    </configuration>
++    <recent_temporary>
++      <list>
++        <item itemvalue="HTTP Request.All in post-requests" />
++      </list>
++    </recent_temporary>
++  </component>
+   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+   <component name="TaskManager">
+     <task active="true" id="Default" summary="Default task">
+@@ -77,7 +100,10 @@
+       <updated>1665949365203</updated>
+       <workItem from="1665949366786" duration="2465000" />
+       <workItem from="1665951855300" duration="9387000" />
+-      <workItem from="1666043907758" duration="11811000" />
++      <workItem from="1666043907758" duration="12468000" />
++      <workItem from="1666218522557" duration="2395000" />
++      <workItem from="1666221925753" duration="18000" />
++      <workItem from="1666222268989" duration="10800000" />
+     </task>
+     <servers />
+   </component>
+@@ -85,6 +111,20 @@
+     <option name="version" value="3" />
+   </component>
+   <component name="XDebuggerManager">
++    <breakpoint-manager>
++      <breakpoints>
++        <line-breakpoint enabled="true" type="java-line">
++          <url>file://$PROJECT_DIR$/src/main/java/HttpServerExample/AuthenticatorExample.java</url>
++          <line>16</line>
++          <option name="timeStamp" value="13" />
++        </line-breakpoint>
++        <line-breakpoint enabled="true" type="java-line">
++          <url>file://$PROJECT_DIR$/src/main/java/HttpServerExample/Handlers/HttpHandlerExample.java</url>
++          <line>16</line>
++          <option name="timeStamp" value="14" />
++        </line-breakpoint>
++      </breakpoints>
++    </breakpoint-manager>
+     <pin-to-top-manager>
+       <pinned-members>
+         <PinnedItemInfo parentTag="java.util.HashMap$Node" memberName="key" />
+Index: .idea/httpRequests/2022-10-19T221231.200.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/httpRequests/2022-10-19T221231.200.json b/.idea/httpRequests/2022-10-19T221231.200.json
+new file mode 100644
+--- /dev/null	(date 1666228351612)
++++ b/.idea/httpRequests/2022-10-19T221231.200.json	(date 1666228351612)
+@@ -0,0 +1,21 @@
++{
++  "args": {},
++  "data": "",
++  "files": {
++    "data": "{\n  \"name\": \"my-name\",\n  \"params\": [1, 2, 3]\n}"
++  },
++  "form": {
++    "element-name": "Name"
++  },
++  "headers": {
++    "Accept-Encoding": "gzip,deflate",
++    "Content-Length": "360",
++    "Content-Type": "multipart/form-data; boundary=WebAppBoundary",
++    "Host": "httpbin.org",
++    "User-Agent": "Apache-HttpClient/4.5.13 (Java/17.0.4.1)",
++    "X-Amzn-Trace-Id": "Root=1-6350a07f-7d8b74ac4912bba67bee343e"
++  },
++  "json": null,
++  "origin": "200.97.50.220",
++  "url": "https://httpbin.org/post"
++}
+Index: bin/.idea/uiDesigner.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/bin/.idea/uiDesigner.xml b/bin/.idea/uiDesigner.xml
+new file mode 100644
+--- /dev/null	(date 1666050791056)
++++ b/bin/.idea/uiDesigner.xml	(date 1666050791056)
+@@ -0,0 +1,124 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="Palette2">
++    <group name="Swing">
++      <item class="com.intellij.uiDesigner.HSpacer" tooltip-text="Horizontal Spacer" icon="/com/intellij/uiDesigner/icons/hspacer.svg" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="1" hsize-policy="6" anchor="0" fill="1" />
++      </item>
++      <item class="com.intellij.uiDesigner.VSpacer" tooltip-text="Vertical Spacer" icon="/com/intellij/uiDesigner/icons/vspacer.svg" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="6" hsize-policy="1" anchor="0" fill="2" />
++      </item>
++      <item class="javax.swing.JPanel" icon="/com/intellij/uiDesigner/icons/panel.svg" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="3" />
++      </item>
++      <item class="javax.swing.JScrollPane" icon="/com/intellij/uiDesigner/icons/scrollPane.svg" removable="false" auto-create-binding="false" can-attach-label="true">
++        <default-constraints vsize-policy="7" hsize-policy="7" anchor="0" fill="3" />
++      </item>
++      <item class="javax.swing.JButton" icon="/com/intellij/uiDesigner/icons/button.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="3" anchor="0" fill="1" />
++        <initial-values>
++          <property name="text" value="Button" />
++        </initial-values>
++      </item>
++      <item class="javax.swing.JRadioButton" icon="/com/intellij/uiDesigner/icons/radioButton.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="3" anchor="8" fill="0" />
++        <initial-values>
++          <property name="text" value="RadioButton" />
++        </initial-values>
++      </item>
++      <item class="javax.swing.JCheckBox" icon="/com/intellij/uiDesigner/icons/checkBox.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="3" anchor="8" fill="0" />
++        <initial-values>
++          <property name="text" value="CheckBox" />
++        </initial-values>
++      </item>
++      <item class="javax.swing.JLabel" icon="/com/intellij/uiDesigner/icons/label.svg" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="0" anchor="8" fill="0" />
++        <initial-values>
++          <property name="text" value="Label" />
++        </initial-values>
++      </item>
++      <item class="javax.swing.JTextField" icon="/com/intellij/uiDesigner/icons/textField.svg" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1">
++          <preferred-size width="150" height="-1" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JPasswordField" icon="/com/intellij/uiDesigner/icons/passwordField.svg" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1">
++          <preferred-size width="150" height="-1" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JFormattedTextField" icon="/com/intellij/uiDesigner/icons/formattedTextField.svg" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1">
++          <preferred-size width="150" height="-1" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JTextArea" icon="/com/intellij/uiDesigner/icons/textArea.svg" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
++          <preferred-size width="150" height="50" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JTextPane" icon="/com/intellij/uiDesigner/icons/textPane.svg" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
++          <preferred-size width="150" height="50" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JEditorPane" icon="/com/intellij/uiDesigner/icons/editorPane.svg" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
++          <preferred-size width="150" height="50" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JComboBox" icon="/com/intellij/uiDesigner/icons/comboBox.svg" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="0" hsize-policy="2" anchor="8" fill="1" />
++      </item>
++      <item class="javax.swing.JTable" icon="/com/intellij/uiDesigner/icons/table.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
++          <preferred-size width="150" height="50" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JList" icon="/com/intellij/uiDesigner/icons/list.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="6" hsize-policy="2" anchor="0" fill="3">
++          <preferred-size width="150" height="50" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JTree" icon="/com/intellij/uiDesigner/icons/tree.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
++          <preferred-size width="150" height="50" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JTabbedPane" icon="/com/intellij/uiDesigner/icons/tabbedPane.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="3">
++          <preferred-size width="200" height="200" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JSplitPane" icon="/com/intellij/uiDesigner/icons/splitPane.svg" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="3">
++          <preferred-size width="200" height="200" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JSpinner" icon="/com/intellij/uiDesigner/icons/spinner.svg" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1" />
++      </item>
++      <item class="javax.swing.JSlider" icon="/com/intellij/uiDesigner/icons/slider.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1" />
++      </item>
++      <item class="javax.swing.JSeparator" icon="/com/intellij/uiDesigner/icons/separator.svg" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3" />
++      </item>
++      <item class="javax.swing.JProgressBar" icon="/com/intellij/uiDesigner/icons/progressbar.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="0" fill="1" />
++      </item>
++      <item class="javax.swing.JToolBar" icon="/com/intellij/uiDesigner/icons/toolbar.svg" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="0" fill="1">
++          <preferred-size width="-1" height="20" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JToolBar$Separator" icon="/com/intellij/uiDesigner/icons/toolbarSeparator.svg" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="0" anchor="0" fill="1" />
++      </item>
++      <item class="javax.swing.JScrollBar" icon="/com/intellij/uiDesigner/icons/scrollbar.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="6" hsize-policy="0" anchor="0" fill="2" />
++      </item>
++    </group>
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/runConfigurations/ServerTest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/runConfigurations/ServerTest.xml b/.idea/runConfigurations/ServerTest.xml
+new file mode 100644
+--- /dev/null	(date 1666228473940)
++++ b/.idea/runConfigurations/ServerTest.xml	(date 1666228473940)
+@@ -0,0 +1,18 @@
++<component name="ProjectRunConfigurationManager">
++  <configuration default="false" name="ServerTest" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
++    <module name="HttpServerExample" />
++    <extension name="coverage">
++      <pattern>
++        <option name="PATTERN" value="HttpServerExample.*" />
++        <option name="ENABLED" value="true" />
++      </pattern>
++    </extension>
++    <option name="PACKAGE_NAME" value="HttpServerExample" />
++    <option name="MAIN_CLASS_NAME" value="HttpServerExample.ServerTest" />
++    <option name="METHOD_NAME" value="" />
++    <option name="TEST_OBJECT" value="class" />
++    <method v="2">
++      <option name="Make" enabled="true" />
++    </method>
++  </configuration>
++</component>
+\ No newline at end of file
+Index: bin/.idea/encodings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/bin/.idea/encodings.xml b/bin/.idea/encodings.xml
+new file mode 100644
+--- /dev/null	(date 1665949388131)
++++ b/bin/.idea/encodings.xml	(date 1665949388131)
+@@ -0,0 +1,7 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="Encoding">
++    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
++    <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/inspectionProfiles/Project_Default.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/inspectionProfiles/Project_Default.xml b/.idea/inspectionProfiles/Project_Default.xml
+new file mode 100644
+--- /dev/null	(date 1666231249358)
++++ b/.idea/inspectionProfiles/Project_Default.xml	(date 1666231249358)
+@@ -0,0 +1,12 @@
++<component name="InspectionProjectProfileManager">
++  <profile version="1.0">
++    <option name="myName" value="Project Default" />
++    <inspection_tool class="IncorrectHttpHeaderInspection" enabled="true" level="WARNING" enabled_by_default="true">
++      <option name="customHeaders">
++        <set>
++          <option value="Authorization: Basic" />
++        </set>
++      </option>
++    </inspection_tool>
++  </profile>
++</component>
+\ No newline at end of file
+Index: bin/.idea/vcs.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/bin/.idea/vcs.xml b/bin/.idea/vcs.xml
+new file mode 100644
+--- /dev/null	(date 1665949366096)
++++ b/bin/.idea/vcs.xml	(date 1665949366096)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="VcsDirectoryMappings">
++    <mapping directory="$PROJECT_DIR$" vcs="Git" />
++  </component>
++</project>
+\ No newline at end of file
+Index: bin/.idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/bin/.idea/misc.xml b/bin/.idea/misc.xml
+new file mode 100644
+--- /dev/null	(date 1665949366080)
++++ b/bin/.idea/misc.xml	(date 1665949366080)
+@@ -0,0 +1,14 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="ExternalStorageConfigurationManager" enabled="true" />
++  <component name="MavenProjectsManager">
++    <option name="originalFiles">
++      <list>
++        <option value="$PROJECT_DIR$/pom.xml" />
++      </list>
++    </option>
++  </component>
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="17" project-jdk-type="JavaSDK">
++    <output url="file://$PROJECT_DIR$/out" />
++  </component>
++</project>
+\ No newline at end of file
+Index: bin/.idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/bin/.idea/workspace.xml b/bin/.idea/workspace.xml
+new file mode 100644
+--- /dev/null	(date 1666221943437)
++++ b/bin/.idea/workspace.xml	(date 1666221943437)
+@@ -0,0 +1,95 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="AutoImportSettings">
++    <option name="autoReloadType" value="SELECTIVE" />
++  </component>
++  <component name="ChangeListManager">
++    <list default="true" id="fc8921f7-0db9-475b-a12b-74f2898f4c8b" name="Changes" comment="">
++      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/HttpServerExample/Handlers/HttpHandlerExample.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/HttpServerExample/Handlers/HttpHandlerExample.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/test/java/HttpServerExample/ServerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/HttpServerExample/ServerTest.java" afterDir="false" />
++    </list>
++    <option name="SHOW_DIALOG" value="false" />
++    <option name="HIGHLIGHT_CONFLICTS" value="true" />
++    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
++    <option name="LAST_RESOLUTION" value="IGNORE" />
++  </component>
++  <component name="FileTemplateManagerImpl">
++    <option name="RECENT_TEMPLATES">
++      <list>
++        <option value="JUnit5 Test Class" />
++        <option value="Class" />
++      </list>
++    </option>
++  </component>
++  <component name="Git.Settings">
++    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
++  </component>
++  <component name="HttpClientSelectedEnvironments">
++    <file url="jar://$APPLICATION_HOME_DIR$/plugins/restClient/lib/restClient.jar!/com/intellij/ws/rest/client/requests/collection/requests-with-tests.http" environment="test" />
++  </component>
++  <component name="MarkdownSettingsMigration">
++    <option name="stateVersion" value="1" />
++  </component>
++  <component name="ProjectId" id="2GEMbeIHuXWGcZXS5rWsSqTgrXR" />
++  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
++  <component name="ProjectViewState">
++    <option name="hideEmptyMiddlePackages" value="true" />
++    <option name="showLibraryContents" value="true" />
++  </component>
++  <component name="PropertiesComponent">{
++  &quot;keyToString&quot;: {
++    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
++    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
++    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
++    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
++    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
++    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
++    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
++    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
++    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
++    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
++    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
++    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
++    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
++    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
++    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
++  }
++}</component>
++  <component name="RecentsManager">
++    <key name="CreateTestDialog.Recents.Supers">
++      <recent name="" />
++    </key>
++    <key name="CreateTestDialog.RecentsKey">
++      <recent name="HttpServerExample" />
++      <recent name="HttpServer" />
++    </key>
++  </component>
++  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
++  <component name="TaskManager">
++    <task active="true" id="Default" summary="Default task">
++      <changelist id="fc8921f7-0db9-475b-a12b-74f2898f4c8b" name="Changes" comment="" />
++      <created>1665949365203</created>
++      <option name="number" value="Default" />
++      <option name="presentableId" value="Default" />
++      <updated>1665949365203</updated>
++      <workItem from="1665949366786" duration="2465000" />
++      <workItem from="1665951855300" duration="9387000" />
++      <workItem from="1666043907758" duration="12468000" />
++      <workItem from="1666218522557" duration="2395000" />
++      <workItem from="1666221925753" duration="18000" />
++    </task>
++    <servers />
++  </component>
++  <component name="TypeScriptGeneratedFilesManager">
++    <option name="version" value="3" />
++  </component>
++  <component name="XDebuggerManager">
++    <pin-to-top-manager>
++      <pinned-members>
++        <PinnedItemInfo parentTag="java.util.HashMap$Node" memberName="key" />
++        <PinnedItemInfo parentTag="jdk.internal.net.http.HttpClientImpl" memberName="version" />
++      </pinned-members>
++    </pin-to-top-manager>
++  </component>
++</project>
+\ No newline at end of file
+Index: src/main/java/HttpServerExample/Handlers/HttpHandlerExample.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package HttpServerExample.Handlers;\n\nimport com.sun.net.httpserver.Headers;\nimport com.sun.net.httpserver.HttpExchange;\nimport com.sun.net.httpserver.HttpHandler;\n\nimport java.io.IOException;\nimport java.io.InputStream;\nimport java.io.OutputStream;\n\npublic class HttpHandlerExample implements HttpHandler {\n\n    @Override\n    public void handle(HttpExchange httpExchange) throws IOException {\n//    \tString response = \"{\\\"message\\\":\\\"ok\\\"}\"; \n//    \t\n//        httpExchange.sendResponseHeaders(200, response.length());\n//        OutputStream outputStream = httpExchange.getResponseBody();\n//        outputStream.write(response.getBytes(\"UTF-8\"));\n//        httpExchange.close();\n    \t\n    \tfinal InputStream inputStream;\n    \tfinal OutputStream outputStream;\n    \tStringBuilder buffer;\n    \tint bytes;\n    \tfinal String request, response;\n    \t\n    \tbuffer = new StringBuilder();\n    \tinputStream = httpExchange.getRequestBody();\n    \t\n    \t// Este método read do inputStream lê o byte 0 até 255\n    \t// Quando chega em 255, ele vai para -1\n    \twhile((bytes = inputStream.read()) != -1) {\n    \t\t// Aqui, damos um append no bufferString\n    \t\t// Que sofre cast para char, afim de lermos o seu length \n    \t\t// Parsando para string.\n    \t\tbuffer.append((char) bytes);\n    \t}\n    \t\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/HttpServerExample/Handlers/HttpHandlerExample.java b/src/main/java/HttpServerExample/Handlers/HttpHandlerExample.java
+--- a/src/main/java/HttpServerExample/Handlers/HttpHandlerExample.java	(revision 051ea0c4aad026ad4a5a4c808271e90d4c006f6e)
++++ b/src/main/java/HttpServerExample/Handlers/HttpHandlerExample.java	(date 1666230853342)
+@@ -12,30 +12,11 @@
+ 
+     @Override
+     public void handle(HttpExchange httpExchange) throws IOException {
+-//    	String response = "{\"message\":\"ok\"}"; 
+-//    	
+-//        httpExchange.sendResponseHeaders(200, response.length());
+-//        OutputStream outputStream = httpExchange.getResponseBody();
+-//        outputStream.write(response.getBytes("UTF-8"));
+-//        httpExchange.close();
+-    	
+-    	final InputStream inputStream;
+-    	final OutputStream outputStream;
+-    	StringBuilder buffer;
+-    	int bytes;
+-    	final String request, response;
+-    	
+-    	buffer = new StringBuilder();
+-    	inputStream = httpExchange.getRequestBody();
+-    	
+-    	// Este método read do inputStream lê o byte 0 até 255
+-    	// Quando chega em 255, ele vai para -1
+-    	while((bytes = inputStream.read()) != -1) {
+-    		// Aqui, damos um append no bufferString
+-    		// Que sofre cast para char, afim de lermos o seu length 
+-    		// Parsando para string.
+-    		buffer.append((char) bytes);
+-    	}
+-    	
+-    }
++    	String response = "{\"message\":\"ok\"}";
++        httpExchange.sendResponseHeaders(200, response.length());
++        httpExchange.getRequestHeaders(); 
++        OutputStream outputStream = httpExchange.getResponseBody();
++        outputStream.write(response.getBytes("UTF-8"));
++        httpExchange.close();
++	}
+ }
+Index: .idea/httpRequests/http-requests-log.http
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/httpRequests/http-requests-log.http b/.idea/httpRequests/http-requests-log.http
+--- a/.idea/httpRequests/http-requests-log.http	(revision 051ea0c4aad026ad4a5a4c808271e90d4c006f6e)
++++ b/.idea/httpRequests/http-requests-log.http	(date 1666228361028)
+@@ -1,0 +1,108 @@
++POST https://httpbin.org/post
++Content-Type: application/json
++
++{
++  "id": 1206fc13-ae7a-4540-9a04-33aa5eb7b23d,
++  "price": 791,
++  "ts": 1666228351,
++  "value": "content"
++}
++
++<> 2022-10-19T221232.200.json
++
++###
++
++POST https://httpbin.org/post
++Content-Type: multipart/form-data; boundary=WebAppBoundary
++
++--WebAppBoundary
++Content-Disposition: form-data; name="element-name"
++Content-Type: text/plain
++
++Name
++--WebAppBoundary
++Content-Disposition: form-data; name="data"; filename="data.json"
++Content-Type: application/json
++
++< /tmp/http_request_input_file1.txt
++--WebAppBoundary--
++
++<> 2022-10-19T221231.200.json
++
++###
++
++POST https://httpbin.org/post
++Content-Type: application/x-www-form-urlencoded
++
++id=999&value=content
++
++<> 2022-10-19T221230-1.200.json
++
++###
++
++POST https://httpbin.org/post
++Content-Type: application/json
++
++{
++  "id": 999,
++  "value": "content"
++}
++
++<> 2022-10-19T221230.200.json
++
++###
++
++POST https://httpbin.org/post
++Content-Type: application/json
++
++{
++  "id": 925592de-c58a-4782-9311-011119f008df,
++  "price": 854,
++  "ts": 1666224668,
++  "value": "content"
++}
++
++<> 2022-10-19T211108-1.200.json
++
++###
++
++POST https://httpbin.org/post
++Content-Type: multipart/form-data; boundary=WebAppBoundary
++
++--WebAppBoundary
++Content-Disposition: form-data; name="element-name"
++Content-Type: text/plain
++
++Name
++--WebAppBoundary
++Content-Disposition: form-data; name="data"; filename="data.json"
++Content-Type: application/json
++
++< /tmp/http_request_input_file.txt
++--WebAppBoundary--
++
++<> 2022-10-19T211108.200.json
++
++###
++
++POST https://httpbin.org/post
++Content-Type: application/x-www-form-urlencoded
++
++id=999&value=content
++
++<> 2022-10-19T211107-1.200.json
++
++###
++
++POST https://httpbin.org/post
++Content-Type: application/json
++
++{
++  "id": 999,
++  "value": "content"
++}
++
++<> 2022-10-19T211107.200.json
++
++###
++
+Index: src/main/java/HttpServerExample/ServerExample.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package HttpServerExample;\n\nimport HttpServerExample.Handlers.HttpHandlerExample;\nimport com.sun.net.httpserver.HttpHandler;\nimport com.sun.net.httpserver.HttpServer;\n\nimport java.io.IOException;\nimport java.net.InetSocketAddress;\n\npublic class ServerExample {\n    private HttpServer httpServer;\n    private static final int port = 8000;\n    public void createServer() {\n        try {\n            this.httpServer = HttpServer.create(new InetSocketAddress(ServerExample.port), 0);\n        } catch (IOException e) {\n            e.getMessage();\n        }\n    }\n\n    public HttpServer getHttpServer() {\n        return this.httpServer;\n    }\n\n    private void handleRequests(HttpHandler handler) {\n        this.httpServer.createContext(\"/test\", handler);\n    }\n\n    public void startServer() {\n        this.handleRequests(new HttpHandlerExample());\n        this.httpServer.start();\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/HttpServerExample/ServerExample.java b/src/main/java/HttpServerExample/ServerExample.java
+--- a/src/main/java/HttpServerExample/ServerExample.java	(revision 051ea0c4aad026ad4a5a4c808271e90d4c006f6e)
++++ b/src/main/java/HttpServerExample/ServerExample.java	(date 1666229853044)
+@@ -23,7 +23,8 @@
+     }
+ 
+     private void handleRequests(HttpHandler handler) {
+-        this.httpServer.createContext("/test", handler);
++
++        this.httpServer.createContext("/test", handler).setAuthenticator(new AuthenticatorExample("test"));
+     }
+ 
+     public void startServer() {
+Index: src/test/java/HttpServerExample/ServerTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package HttpServerExample;\n\nimport org.junit.jupiter.api.Assertions;\nimport org.junit.jupiter.api.BeforeAll;\nimport org.junit.jupiter.api.Test;\nimport java.io.IOException;\nimport java.net.URI;\nimport java.net.URISyntaxException;\nimport java.net.http.HttpClient;\nimport java.net.http.HttpRequest;\nimport java.net.http.HttpResponse;\nimport java.util.concurrent.Executors;\nimport java.util.concurrent.ThreadPoolExecutor;\n\nclass ServerTest {\n\tprivate String url = \"http://localhost:8000/test\";\n\t\n\t\n    @BeforeAll\n    public static void createServerWithIpAndStart() throws IOException {\n        ThreadPoolExecutor threadPoolExecutor = (ThreadPoolExecutor) Executors.newFixedThreadPool(10);\n        ServerExample serverExample = new ServerExample();\n        serverExample.createServer();\n        serverExample.getHttpServer().setExecutor(threadPoolExecutor);\n        serverExample.startServer();\n        System.out.println(\"Server started on port \" + serverExample.getHttpServer().getAddress());\n    }\n\n    @Test\n    void itShouldSendRequestAndReturnHttpCode200() throws URISyntaxException, InterruptedException, IOException {\n        HttpClient client = HttpClient.newHttpClient();\n        HttpRequest request = HttpRequest.newBuilder()\n                .uri(new URI(\"http://localhost:8000/test\"))\n                .build();\n        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());\n\n        Assertions.assertEquals(response.statusCode(), 200);\n    }\n    \n    @Test\n    void itShouldSendAnPOSTRequestAndReturnHttpCode200() throws IOException, InterruptedException {\n    \tHttpClient client = HttpClient.newHttpClient();\n    \tHttpRequest request = HttpRequest.newBuilder()\n    \t\t\t.uri(URI.create(this.url))\n    \t\t\t.POST(HttpRequest.BodyPublishers.noBody())\n    \t\t\t.build();\n    \tHttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());\n    \t\n    \tAssertions.assertEquals(response.statusCode(), 200);\n    \tAssertions.assertEquals(response.body(), \"{\\\"message\\\":\\\"ok\\\"}\");\n    \t\n    }\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/HttpServerExample/ServerTest.java b/src/test/java/HttpServerExample/ServerTest.java
+--- a/src/test/java/HttpServerExample/ServerTest.java	(revision 051ea0c4aad026ad4a5a4c808271e90d4c006f6e)
++++ b/src/test/java/HttpServerExample/ServerTest.java	(date 1666233155145)
+@@ -1,23 +1,35 @@
+ package HttpServerExample;
+ 
++import com.sun.net.httpserver.Headers;
+ import org.junit.jupiter.api.Assertions;
+ import org.junit.jupiter.api.BeforeAll;
+ import org.junit.jupiter.api.Test;
+-import java.io.IOException;
++
++import java.net.Authenticator;
+ import java.net.URI;
+ import java.net.URISyntaxException;
+ import java.net.http.HttpClient;
++import java.net.http.HttpHeaders;
+ import java.net.http.HttpRequest;
+ import java.net.http.HttpResponse;
++import java.util.Base64;
++import java.util.Map;
++import java.util.Optional;
++import java.util.concurrent.CompletableFuture;
++import java.util.concurrent.ExecutionException;
+ import java.util.concurrent.Executors;
+ import java.util.concurrent.ThreadPoolExecutor;
+ 
+ class ServerTest {
+-	private String url = "http://localhost:8000/test";
++	private final String url = "http://localhost:8000/test";
+ 	
+-	
++
++    private static final String getBasicAuthenticator(String username, String password) {
++        String valueToEncode = username + ":" + password;
++        return "Basic " + Base64.getEncoder().encodeToString(valueToEncode.getBytes());
++    }
+     @BeforeAll
+-    public static void createServerWithIpAndStart() throws IOException {
++    public static void createServerWithIpAndStart()  {
+         ThreadPoolExecutor threadPoolExecutor = (ThreadPoolExecutor) Executors.newFixedThreadPool(10);
+         ServerExample serverExample = new ServerExample();
+         serverExample.createServer();
+@@ -27,27 +39,34 @@
+     }
+ 
+     @Test
+-    void itShouldSendRequestAndReturnHttpCode200() throws URISyntaxException, InterruptedException, IOException {
++    void itShouldSendRequestAndReturnHttpCode200() throws InterruptedException, ExecutionException {
+         HttpClient client = HttpClient.newHttpClient();
+         HttpRequest request = HttpRequest.newBuilder()
+-                .uri(new URI("http://localhost:8000/test"))
++                .setHeader("Authorization", getBasicAuthenticator("admin", "password"))
++                .uri(URI.create(this.url))
++                .GET()
+                 .build();
+-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
++        CompletableFuture<HttpResponse<String>> response = client.sendAsync(
++                request,
++                HttpResponse.BodyHandlers.ofString()).whenComplete((s, t) -> s.body());
+ 
+-        Assertions.assertEquals(response.statusCode(), 200);
++        Assertions.assertEquals(response.get().statusCode(), 200);
+     }
+     
+     @Test
+-    void itShouldSendAnPOSTRequestAndReturnHttpCode200() throws IOException, InterruptedException {
++    void itShouldSendAnPOSTRequestAndReturnHttpCode200() throws InterruptedException, ExecutionException {
+     	HttpClient client = HttpClient.newHttpClient();
+     	HttpRequest request = HttpRequest.newBuilder()
++                .header("Authorization", getBasicAuthenticator("admin", "password"))
+     			.uri(URI.create(this.url))
+     			.POST(HttpRequest.BodyPublishers.noBody())
+     			.build();
+-    	HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
++    	CompletableFuture<HttpResponse<String>> response =
++                client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
++                        .whenComplete((s, t) -> s.body());
+     	
+-    	Assertions.assertEquals(response.statusCode(), 200);
+-    	Assertions.assertEquals(response.body(), "{\"message\":\"ok\"}");
++    	Assertions.assertEquals(response.get().statusCode(), 200);
++    	Assertions.assertEquals(response.get().body(), "{\"message\":\"ok\"}");
+     	
+     }
+ }
+\ No newline at end of file
+diff --git a/bin/.idea/httpRequests/http-requests-log.http b/bin/.idea/httpRequests/http-requests-log.http
+new file mode 100644
