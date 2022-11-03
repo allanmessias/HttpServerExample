@@ -5,7 +5,7 @@ Well, when you're surfing the web you kinda send packages across the internet an
 
 ## But what does HTTP has to do with it? 
 
-HTTP is just a protocol, and like any other protocol, it stands to keep things in order and facilitate communication across clients and servers, using verbs actions, such as: get, post, delete, put, patch, and provide a code information with it. 
+HTTP is just a protocol, and like any other protocol, it stands to keep things in order and facilitate communication across clients and servers, using action verbs, such as: get, post, delete, put, patch, and providing a code information with it. 
 
 Along with it, HTTP uses headers for requests and responses, providing every information a request accepts for that specific response. It's like you're ordering a pizza and saying your request to the waiter, with the tops and layers you want in your pizza. If the restaurant has it, the waiter will bring it to you, but if it doesn't the waiter will inform that your request couldn't be processed. Either way you get your response. 
 
