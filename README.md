@@ -18,7 +18,7 @@ The image below sums all of it:
 ## Nice, but how to do it with Java?
 Java has nice objects for http, it also has built-ins autheticators, HTTPS, SSL, communication via websockets and so on. There's a <strong>VAST</vast> library provided by Sun, introduced to JDK since Java 9 and 11 for better working http clients. 
 
-It's not so much productive to work with, and Oracle itself says it's only for educational purposes, but since you grasp on it, you'll become to understand how things works behind the curtains. 
+It's not so much productive to work with, and Oracle itself says it's only for educational purposes, but since you grasp on it, you'll come to understand how things works behind the curtains. 
 
 For server's implementation you can follow the documentation: https://docs.oracle.com/javase/8/docs/jre/api/net/httpserver/spec/com/sun/net/httpserver/HttpServer.html
 
